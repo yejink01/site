@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
+import Lo from "./image/노홍철.jpg";
+import U from "./image/유재석.png";
+import J from "./image/정준하.jpg";
+import JJ from "./image/정형돈.jpg";
+import P from "./image/박명수.jpg";
+import H from "./image/하하.jpg";
 const questions = [
   {
     id: 1,
@@ -56,9 +61,34 @@ const ResultPage = ({ member }) => {
 
   const characteristics = memberCharacteristics[member];
 
+  const handle = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: "당신과 비슷한 무한도전 멤버는?",
+        text: "당신과 비슷한 무한도전 멤버는?",
+        url: "https://site-auhd-yejink01.vercel.app/",
+      });
+    } else {
+      console.log("공유하기가 지원되지 않는 환경 입니다.");
+    }
+  };
+
   return (
     <ResultContainer>
-      <ResultText>당신과 비슷한 무한도전 멤버는?😂</ResultText>
+      <ResultText onClick={handle}>당신과 비슷한 무한도전 멤버는?😂</ResultText>
+      {member === "유재석" ? (
+        <img src={U} width={250} height={250} />
+      ) : member === "정준하" ? (
+        <img src={J} width={250} height={250} />
+      ) : member === "정형돈" ? (
+        <img src={JJ} width={250} height={250} />
+      ) : member === "하하" ? (
+        <img src={H} width={250} height={250} />
+      ) : member === "박명수" ? (
+        <img src={P} width={250} height={250} />
+      ) : member === "노홍철" ? (
+        <img src={Lo} width={250} height={250} />
+      ) : undefined}
       <MemberName>{member}</MemberName>
       <Answer>{characteristics}</Answer>
     </ResultContainer>
@@ -184,7 +214,6 @@ const App = () => {
 
   return (
     <Container>
-      
       {result ? (
         <ResultPage member={result[0]} />
       ) : (
